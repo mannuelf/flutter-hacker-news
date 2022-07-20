@@ -28,7 +28,7 @@ class NewsDbProvider {
         )
   """;
 
-  init() async {
+  void init() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     final path = join(documentsDirectory.path, 'items.db');
     db = await openDatabase(path, version: 1,
@@ -37,17 +37,17 @@ class NewsDbProvider {
     });
   }
 
-  fetchItem(int id) async {
+  Future<ItemModel> fetchItem(int id) async {
     final maps = await db
         .query(itemsTable, columns: null, where: 'id = ?', whereArgs: [id]);
 
     if (maps.length > 0) {
       return ItemModel.fromDb(maps.first);
     }
-    return null;
+    return null!;
   }
 
-  addItem(ItemModel item) {
+  Future<int> addItem(ItemModel item) {
     return db.insert(itemsTable, item.toMapForDb());
   }
 }
