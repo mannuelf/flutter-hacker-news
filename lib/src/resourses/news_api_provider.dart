@@ -1,6 +1,8 @@
 import 'package:http/http.dart' show Client;
 import 'dart:convert';
 
+import '../models/item.dart';
+
 const _root = '//hacker-news.firebaseio.com/v0';
 
 class NewsApiProvider {
@@ -14,6 +16,8 @@ class NewsApiProvider {
 
   fetchItem(int id) async {
     final response = await client.get('$_root/item/$id.json');
-    return json.decode(response.body);
+    final parsedJson = json.decode(response.body);
+
+    return ItemModel.fromJson(parsedJson);
   }
 }
