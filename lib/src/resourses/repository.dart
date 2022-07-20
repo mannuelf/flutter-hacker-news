@@ -21,6 +21,11 @@ class Repository {
       return item;
     }
 
+    // find the item and save it locally here
     item = await apiProvider.fetchItem(id);
+    // attempt to add to our database
+    await dbProvider.addItem(item);
+
+    return item;
   }
 }
