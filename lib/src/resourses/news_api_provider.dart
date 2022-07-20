@@ -12,8 +12,9 @@ class NewsApiProvider {
 
   Future<List<int>> fetchTopIds() async {
     final response = await client.get(Uri.parse('$_root/topstories.json'));
+    // dart only sees the list, cannot see the type, so you can cast
     final ids = json.decode(response.body);
-    return ids;
+    return ids.cast<int>();
   }
 
   Future<ItemModel> fetchItem(int id) async {
