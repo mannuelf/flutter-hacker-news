@@ -8,6 +8,7 @@ import '../models/item.dart';
 
 class NewsDbProvider {
   late Database db;
+  String itemsTable = "Items";
   String sqlCreateItemsTable = """
     CREATE TABLE Items
         (
@@ -38,11 +39,15 @@ class NewsDbProvider {
 
   fetchItem(int id) async {
     final maps = await db
-        .query('Items', columns: null, where: 'id = ?', whereArgs: [id]);
+        .query(itemsTable, columns: null, where: 'id = ?', whereArgs: [id]);
 
     if (maps.length > 0) {
       return ItemModel.fromDb(maps.first);
     }
     return null;
+  }
+
+  addItem(ItemModel item) async {
+    db.insert(itemsTable, item);
   }
 }
