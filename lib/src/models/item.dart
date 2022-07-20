@@ -49,17 +49,19 @@ class ItemModel {
         title = parsedJson['title'],
         descendants = parsedJson['descendants'];
 
+  // Used to add items to DB
+  // sqlite cannot store booleans, so we ternary op and send 1 or 0
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       "id": id,
-      "deleted": deleted,
+      "deleted": deleted ? 1 : 0,
       "type": type,
       "by": by,
       "time": time,
       "text": text,
-      "dead": dead,
+      "dead": dead ? 1 : 0,
       "parent": parent,
-      "kids": kids,
+      "kids": jsonEncode(kids),
       "url": url,
       "score": score,
       "title": title,
