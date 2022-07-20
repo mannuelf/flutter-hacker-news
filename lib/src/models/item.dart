@@ -51,7 +51,7 @@ class ItemModel {
 
   // Used to add items to DB
   // sqlite cannot store booleans, so we ternary op and send 1 or 0
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMapForDb() {
     return <String, dynamic>{
       "id": id,
       "deleted": deleted ? 1 : 0,

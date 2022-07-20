@@ -47,7 +47,7 @@ class NewsDbProvider {
     return null;
   }
 
-  addItem(ItemModel item) async {
-    db.insert(itemsTable, item);
+  addItem(ItemModel item) {
+    return db.insert(itemsTable, item.toMapForDb());
   }
 }
