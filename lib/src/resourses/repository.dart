@@ -13,4 +13,14 @@ class Repository {
   fetchTopIds() {
     return apiProvider.fetchTopIds();
   }
+
+  fetchItem(int id) async {
+    // var is mutable.
+    var item = await dbProvider.fetchItem(id);
+    if (item != null) {
+      return item;
+    }
+
+    item = await apiProvider.fetchItem(id);
+  }
 }
