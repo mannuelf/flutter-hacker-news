@@ -7,7 +7,8 @@ import 'package:newz/src/resourses/news_api_provider.dart';
 void main() {
   test('FetchTopIds returns a list of ids', () {
     // setup test case
-
+    final sum = 1 + 3;
     // expectation
+    expect(sum, 4);
   });
 }
