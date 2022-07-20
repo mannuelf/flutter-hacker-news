@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class ItemModel {
   final int id;
   final bool deleted;
@@ -13,7 +15,7 @@ class ItemModel {
   final String title;
   final int descendants;
 
-  // Receives a big blob of parsed json data
+  // Constructor function: Receives a big blob of parsed json data
   ItemModel.fromJson(Map<String, dynamic> parsedJson)
       : id = parsedJson['id'],
         deleted = parsedJson['deleted'],
@@ -24,6 +26,24 @@ class ItemModel {
         dead = parsedJson['dead'],
         parent = parsedJson['parent'],
         kids = parsedJson['kids'],
+        url = parsedJson['url'],
+        score = parsedJson['score'],
+        title = parsedJson['title'],
+        descendants = parsedJson['descendants'];
+
+  // Constructor function to receive info from DB.
+  // sqlite has no bool, only 1 or 0.
+  // parsedJson['dead'] == 1; Tt coerces it to a boolean (true/false)
+  ItemModel.fromDb(Map<String, dynamic> parsedJson)
+      : id = parsedJson['id'],
+        deleted = parsedJson['deleted'] == 1,
+        type = parsedJson['type'],
+        by = parsedJson['by'],
+        time = parsedJson['time'],
+        text = parsedJson['text'],
+        dead = parsedJson['dead'] == 1,
+        parent = parsedJson['parent'],
+        kids = jsonDecode(parsedJson['kids']),
         url = parsedJson['url'],
         score = parsedJson['score'],
         title = parsedJson['title'],
