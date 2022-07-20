@@ -37,6 +37,6 @@ class NewsDbProvider {
   }
 
   fetchItem(int id) async {
-    db.query('Items');
+    db.query('Items', columns: null, where: 'id = ?', whereArgs: [id]);
   }
 }
