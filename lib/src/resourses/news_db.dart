@@ -35,4 +35,8 @@ class NewsDbProvider {
       newDb.execute(sqlCreateItemsTable);
     });
   }
+
+  fetchItem(int id) async {
+    db.query('Items');
+  }
 }
