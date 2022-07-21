@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class NewsList extends StatelessWidget {
@@ -7,9 +9,32 @@ class NewsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Title'),
+        title: const Text('TOP NEWS'),
       ),
-      body: const Text('Show some news here'),
+      body: buildList(),
     );
+  }
+
+  Widget buildList() {
+    return ListView.builder(
+      itemCount: 1000,
+      itemBuilder: ((context, index) {
+        // simulate fetching data from repository
+        return FutureBuilder(
+          future: getFuture(),
+          builder: (context, snapshot) {
+            return Container(
+                height: 80.0,
+                child: snapshot.hasData
+                    ? Text('Im visible $index')
+                    : Text('I have not fetched data yet $index'));
+          },
+        );
+      }),
+    );
+  }
+
+  getFuture() {
+    return Future.delayed(const Duration(seconds: 2), (() => 'Hi ho'));
   }
 }
