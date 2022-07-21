@@ -34,7 +34,9 @@ class StoriesBloc {
 
   _ItemsTransformer() {
     // cache is the emitted event object, id is the id of the item, index is the iteration of transformed items
-    return ScanStreamTransformer((Object? cache, int id, _) async {
+    return ScanStreamTransformer(
+        (Map<int, Future<ItemModel>> cache, int id, index) {
+      print(id);
       cache[id] = _repository.fetchItem(id);
       return cache;
     }, <int, Future<ItemModel>>{});
