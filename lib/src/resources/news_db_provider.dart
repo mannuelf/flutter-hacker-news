@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../models/item.dart';
-import 'repository.dart';
+import './repository.dart';
 
 class NewsDbProvider implements Source, Cache {
   late Database db;

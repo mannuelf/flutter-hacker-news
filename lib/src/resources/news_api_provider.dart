@@ -4,7 +4,7 @@ import 'dart:core';
 import 'package:http/http.dart' show Client;
 
 import '../models/item.dart';
-import 'repository.dart';
+import './repository.dart';
 
 const _root = 'https://hacker-news.firebaseio.com/v0';
 
