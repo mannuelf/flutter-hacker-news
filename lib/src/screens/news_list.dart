@@ -29,7 +29,7 @@ class NewsList extends StatelessWidget {
       stream: bloc.topIds,
       builder: ((BuildContext context, AsyncSnapshot<List<int>> snapshot) {
         if (!snapshot.hasData) {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         }
 
         return ListView.builder(
