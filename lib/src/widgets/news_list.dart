@@ -8,7 +8,7 @@ import '../models/item.dart';
 class NewsListTile extends StatelessWidget {
   final int itemId; // passed in by parent widget
 
-  const NewsListTile({Key? key, required this.itemId}) : super(key: key);
+  NewsListTile({required this.itemId});
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +18,16 @@ class NewsListTile extends StatelessWidget {
       stream: bloc.items,
       builder: (BuildContext context,
           AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
-        if (!snapshot.hasData) {
+        print('💵 Widgets: news_list.dart');
+        print(snapshot.data);
+        if (snapshot.data == null || !snapshot.hasData) {
           return const Text('Stream still loading');
         }
-
         return FutureBuilder(
             future: snapshot.data![itemId],
             builder:
                 ((BuildContext context, AsyncSnapshot<ItemModel> itemSnapshot) {
-              if (!itemSnapshot.hasData) {
+              if (itemSnapshot.data == null) {
                 return Text('Still loading ${itemSnapshot.data!.id}');
               }
 

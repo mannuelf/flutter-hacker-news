@@ -10,6 +10,11 @@ import './repository.dart';
 
 class NewsDbProvider implements Source, Cache {
   late Database db;
+  // call init function before we use it.
+  NewsDbProvider() {
+    init();
+  }
+
   String itemsTable = "Items";
   String sqlCreateItemsTable = """
     CREATE TABLE Items
@@ -29,11 +34,6 @@ class NewsDbProvider implements Source, Cache {
         )
   """;
 
-  // call init function before we use it.
-  NewsDbProvider() {
-    init();
-  }
-
   // Todo - store and fetch top ids
   @override
   Future<List<int>> fetchTopIds() {
@@ -43,7 +43,7 @@ class NewsDbProvider implements Source, Cache {
 
   void init() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    final path = join(documentsDirectory.path, 'items.db');
+    final path = join(documentsDirectory.path, 'items2.db');
     db = await openDatabase(path, version: 1,
         onCreate: (Database newDb, int version) {
       newDb.execute(sqlCreateItemsTable);
@@ -65,7 +65,8 @@ class NewsDbProvider implements Source, Cache {
 
   @override
   Future<int> addItem(ItemModel item) {
-    return db.insert(itemsTable, item.toMapForDb());
+    return db.insert(itemsTable, item.toMapForDb(),
+        conflictAlgorithm: ConflictAlgorithm.ignore);
   }
 }
 

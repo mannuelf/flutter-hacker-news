@@ -29,6 +29,8 @@ class NewsList extends StatelessWidget {
     return StreamBuilder(
       stream: bloc.topIds,
       builder: ((BuildContext context, AsyncSnapshot<List<int>> snapshot) {
+        print('screens/news_list.dart');
+        print(snapshot.data);
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
         }

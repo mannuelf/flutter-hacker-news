@@ -15,14 +15,14 @@ class NewsApiProvider implements Source {
   Future<List<int>> fetchTopIds() async {
     final response = await client.get(Uri.parse('$_root/topstories.json'));
     // dart only sees the list, cannot see the type, so you can cast
-    final ids = json.decode(response.body);
-    return ids.cast<int>();
+    final ids = await json.decode(response.body);
+    return await ids.cast<int>();
   }
 
   @override
   Future<ItemModel> fetchItem(int id) async {
     final response = await client.get(Uri.parse('$_root/item/$id.json'));
-    final parsedJson = json.decode(response.body);
+    final parsedJson = await json.decode(response.body);
     // give back an Instance of ItemModel
     return ItemModel.fromJson(parsedJson);
   }

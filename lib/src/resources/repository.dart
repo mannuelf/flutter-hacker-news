@@ -17,7 +17,7 @@ class Repository {
 
   Future<ItemModel> fetchItem(int id) async {
     late ItemModel item;
-    late Source source;
+    var source;
 
     for (source in sources) {
       item = await source.fetchItem(id);
@@ -28,7 +28,10 @@ class Repository {
     }
 
     for (var cache in caches) {
-      cache.addItem(item);
+      // ignore: unrelated_type_equality_checks
+      if (cache != source) {
+        cache.addItem(item);
+      }
     }
 
     return item;
