@@ -14,16 +14,20 @@ class Repository {
   }
 
   Future<ItemModel> fetchItem(int id) async {
-    // var is mutable.
-    var item = await dbProvider.fetchItem(id);
-    if (item != null) {
-      return item;
+    late ItemModel item;
+    late Source source;
+
+    for (source in sources) {
+      item = await source.fetchItem(id);
+      // ignore: unnecessary_null_comparison
+      if (item != null) {
+        break;
+      }
     }
 
-    // find the item and save it locally here
-    item = await apiProvider.fetchItem(id);
-    // attempt to add to our database
-    await dbProvider.addItem(item);
+    for (var cache in caches) {
+      cache.addItem(item);
+    }
 
     return item;
   }
