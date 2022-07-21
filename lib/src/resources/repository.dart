@@ -6,8 +6,8 @@ import 'news_db_provider.dart';
 
 // proxy to db, calls providers, app should not call providers directly
 class Repository {
-  List<Source> sources = <Source>[NewsApiProvider(), NewsApiProvider()];
-  List<Cache> caches = <Cache>[NewsDbProvider()];
+  List<Source> sources = <Source>[newsDbProvider, NewsApiProvider()];
+  List<Cache> caches = <Cache>[newsDbProvider];
 
   Future<List> fetchTopIds() {
     return apiProvider.fetchTopIds();
