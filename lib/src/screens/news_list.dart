@@ -11,30 +11,7 @@ class NewsList extends StatelessWidget {
       appBar: AppBar(
         title: const Text('TOP NEWS'),
       ),
-      body: buildList(),
+      body: Text('show list'),
     );
-  }
-
-  Widget buildList() {
-    return ListView.builder(
-      itemCount: 1000,
-      itemBuilder: ((context, index) {
-        // simulate fetching data from repository
-        return FutureBuilder(
-          future: getFuture(),
-          builder: (context, snapshot) {
-            return Container(
-                height: 80.0,
-                child: snapshot.hasData
-                    ? Text('Im visible $index')
-                    : Text('I have not fetched data yet $index'));
-          },
-        );
-      }),
-    );
-  }
-
-  getFuture() {
-    return Future.delayed(const Duration(seconds: 2), (() => 'Hi ho'));
   }
 }
