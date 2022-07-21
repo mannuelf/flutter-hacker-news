@@ -10,7 +10,7 @@ class StoriesBloc {
   final _topIds = PublishSubject<List<int>>(); // Observable of RXDart
   final _items = BehaviorSubject<int>();
   // instance var that will hold the transformed streams
-  Stream<Map<int, Future<ItemModel>>> items;
+  late Stream<Map<int, Future<ItemModel>>> items;
 
   // Getter to Streams
   // https://stackoverflow.com/questions/59336428/observable-is-deprecated-in-rxdart-0-23-1
@@ -34,7 +34,7 @@ class StoriesBloc {
 
   _ItemsTransformer() {
     // cache is the emitted event object, id is the id of the item, index is the iteration of transformed items
-    return ScanStreamTransformer((cache, int id, _) async {
+    return ScanStreamTransformer((Object? cache, int id, _) async {
       cache[id] = _repository.fetchItem(id);
       return cache;
     }, <int, Future<ItemModel>>{});
