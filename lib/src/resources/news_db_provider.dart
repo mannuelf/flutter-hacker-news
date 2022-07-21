@@ -19,7 +19,6 @@ class NewsDbProvider implements Source, Cache {
           by TEXT,
           time TEXT,
           parent INTEGER,
-          parent INTEGER,
           kids BLOB,
           dead INTEGER,
           deleted INTGER,
