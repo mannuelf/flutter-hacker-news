@@ -1,3 +1,21 @@
 import 'dart:async';
+import 'package:rxdart/rxdart.dart';
+import '../resources/repository.dart';
 
-class StoriesBloc {}
+class StoriesBloc {
+  final _repository = Repository();
+  final _topIds = PublishSubject<List<int>>();
+
+  // Getter to Streams
+  // https://stackoverflow.com/questions/59336428/observable-is-deprecated-in-rxdart-0-23-1
+  Stream<List<int>> get topIds => _topIds.stream;
+
+  fetchTopIds() async {
+    final ids = await _repository.fetchTopIds();
+    _topIds.sink.add(ids);
+  }
+
+  dispose() {
+    _topIds.close();
+  }
+}
