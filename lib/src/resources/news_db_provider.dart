@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'repository.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../models/item.dart';
 
-class NewsDbProvider {
+class NewsDbProvider implements Source {
   late Database db;
   String itemsTable = "Items";
   String sqlCreateItemsTable = """
@@ -29,6 +30,13 @@ class NewsDbProvider {
         )
   """;
 
+  // Todo - store and fetch top ids
+  @override
+  Future<List<int>> fetchTopIds() {
+    // ignore: null_check_always_fails
+    return null!;
+  }
+
   void init() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     final path = join(documentsDirectory.path, 'items.db');
@@ -38,13 +46,16 @@ class NewsDbProvider {
     });
   }
 
+  @override
   Future<ItemModel> fetchItem(int id) async {
     final maps = await db
         .query(itemsTable, columns: null, where: 'id = ?', whereArgs: [id]);
 
+    // ignore: prefer_is_empty, its an array for sure.
     if (maps.length > 0) {
       return ItemModel.fromDb(maps.first);
     }
+    // ignore: null_check_always_fails
     return null!; // explicit return null
   }
 
