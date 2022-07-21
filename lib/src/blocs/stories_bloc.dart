@@ -19,7 +19,11 @@ class StoriesBloc {
   }
 
   _ItemsTransformer() {
-    return ScanStreamTransformer(() {}, <int, Future<ItemModel>>{});
+    // cache is the emitted event object, id is the id of the item, index is the iteration of transformed items
+    return ScanStreamTransformer((cache, int id, _) async {
+      cache[id] = _repository.fetchItem(id);
+      return cache;
+    }, <int, Future<ItemModel>>{});
   }
 
   dispose() {
