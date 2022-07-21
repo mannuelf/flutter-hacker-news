@@ -10,10 +10,11 @@ class StoriesProvider extends InheritedWidget {
         super(key: key, child: child!);
 
   @override
-  bool updateShouldNotify(_) => true;
+  bool updateShouldNotify(InheritedWidget oldWidget) => true;
 
   static StoriesBloc of(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType() as StoriesProvider)
+    return (context.dependOnInheritedWidgetOfExactType<StoriesProvider>()
+            as StoriesProvider)
         .bloc;
   }
 }
