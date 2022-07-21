@@ -30,6 +30,11 @@ class NewsDbProvider implements Source, Cache {
         )
   """;
 
+  // call init function before we use it.
+  NewsDbProvider() {
+    init();
+  }
+
   // Todo - store and fetch top ids
   @override
   Future<List<int>> fetchTopIds() {
