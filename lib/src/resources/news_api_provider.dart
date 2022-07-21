@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:core';
 
 import 'package:http/http.dart' show Client;
-import 'repository.dart';
 
 import '../models/item.dart';
+import 'repository.dart';
 
 const _root = '//hacker-news.firebaseio.com/v0';
 

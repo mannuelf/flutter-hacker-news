@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:newz/src/resources/news_db.dart';
 
-import 'news_api_provider.dart';
 import '../models/item.dart';
+import 'news_api_provider.dart';
+import 'news_db.dart';
 
 // proxy to db, calls providers, app should not call providers directly
 class Repository {
