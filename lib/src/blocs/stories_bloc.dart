@@ -24,7 +24,7 @@ class StoriesBloc {
 
   StoriesBloc() {
     // does not modify originally stream, a new stream is created and we want it
-    items = _items.stream.transform(_ItemsTransformer());
+    items = _items.stream.transform(_itemsTransformer());
   }
 
   fetchTopIds() async {
@@ -32,11 +32,10 @@ class StoriesBloc {
     _topIds.sink.add(ids);
   }
 
-  _ItemsTransformer() {
+  _itemsTransformer() {
     // cache is the emitted event object, id is the id of the item, index is the iteration of transformed items
     return ScanStreamTransformer(
         (Map<int, Future<ItemModel>> cache, int id, index) {
-      print(id);
       cache[id] = _repository.fetchItem(id);
       return cache;
     }, <int, Future<ItemModel>>{});

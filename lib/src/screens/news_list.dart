@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../blocs/stories_bloc.dart';
-import '../blocs/stories_provider.dart';
+import '../blocs/stories_provider.dart' show StoriesBloc, StoriesProvider;
 import '../widgets/news_list.dart';
 
 class NewsList extends StatelessWidget {
