@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:newz/src/resourses/news_db.dart';
+import 'package:newz/src/resources/news_db.dart';
 
 import 'news_api_provider.dart';
 import '../models/item.dart';
@@ -28,3 +28,10 @@ class Repository {
     return item;
   }
 }
+
+abstract class Source {
+  Future<List<int>> fetchTopIds();
+  Future<ItemModel> fetchItem(int id);
+}
+
+abstract class Cache {}
