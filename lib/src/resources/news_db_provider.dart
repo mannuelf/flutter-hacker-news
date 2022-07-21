@@ -8,7 +8,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../models/item.dart';
 
-class NewsDbProvider implements Source {
+class NewsDbProvider implements Source, Cache {
   late Database db;
   String itemsTable = "Items";
   String sqlCreateItemsTable = """
