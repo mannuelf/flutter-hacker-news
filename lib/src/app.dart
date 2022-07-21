@@ -10,7 +10,7 @@ class App extends StatelessWidget {
   Widget build(context) {
     return StoriesProvider(
         child: const MaterialApp(
-      title: 'News List',
+      title: '📰 HACKERNEWS',
       home: NewsList(),
     ));
   }

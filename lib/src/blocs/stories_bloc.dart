@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:rxdart/rxdart.dart';
 
+import '../models/item.dart';
 import '../resources/repository.dart';
 
 class StoriesBloc {
@@ -15,6 +16,10 @@ class StoriesBloc {
   fetchTopIds() async {
     final ids = await _repository.fetchTopIds();
     _topIds.sink.add(ids);
+  }
+
+  _ItemsTransformer() {
+    return ScanStreamTransformer(() {}, <int, Future<ItemModel>>{});
   }
 
   dispose() {

@@ -17,7 +17,7 @@ class NewsList extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('TOP NEWS'),
+        title: const Text('📰 HACKERNEWS'),
         backgroundColor: Colors.amber[900],
       ),
       body: buildList(bloc),
